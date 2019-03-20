@@ -1,9 +1,10 @@
 {
   "name": "img-download",
   "version": "1.0.0",
-  "description": "a module helps to download img in the front web page",
+  "description": "a module helps to download img in the web front end",
   "main": "index.js",
   "scripts": {
+    "fix": "eslint --fix .",
     "test": "test"
   },
   "repository": {

@@ -1,11 +1,11 @@
 /**
  * 判断当前浏览器是否为IE，若是为IE *？
  */
-function IEVersion() {
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
-    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
-    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
-    var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+function getBrowser() {
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+    var isIE11 = userAgent.indexOf("Trident") > -1 && userAgent.indexOf("rv:11.0") > -1;
     if(isIE) {
         var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
         reIE.test(userAgent);
@@ -20,11 +20,11 @@ function IEVersion() {
             return 10;
         } else {
             return 6;//IE版本<=7
-        }   
+        }
     } else if(isEdge) {
-        return 'edge';//edge
+        return "edge";//edge
     } else if(isIE11) {
-        return 11; //IE11  
+        return 11; //IE11
     }else{
         return -1;//不是ie浏览器
     }
@@ -42,17 +42,18 @@ var SaveAs5 = function(imgURL) {
 
 //③下载函数(区分IE和非IE部分)
 var oDownLoad = function(url) {
-    if (myBrowser() === "IE" || myBrowser() === "Edge") {
+    if (getBrowser() === "IE" || getBrowser() === "Edge") {
         //IE (浏览器)
         SaveAs5(url);
     } else {
-        //!IE (非IE)    
-        var a = document.createElement('a');            // 创建一个a节点插入的document       
-        var event = new MouseEvent('click')             // 模拟鼠标click点击事件 
-        a.download = 'codePicture'                    // 设置a节点的download属性值               
-        a.href = url;                                   // 将图片的src赋值给a节点的href       
+        //!IE (非IE)
+        var a = document.createElement("a");            // 创建一个a节点插入的document
+        // eslint-disable-next-line no-irregular-whitespace
+        var event = new MouseEvent("click");             // 模拟鼠标click点击事件
+        a.download = "codePicture";                    // 设置a节点的download属性值
+        a.href = url;                                   // 将图片的src赋值给a节点的href
         a.dispatchEvent(event);
-       
+
     }
 
 };
@@ -65,6 +66,7 @@ var MIME = {
     "text/plain": "txt",
     "text/html": "html",
     "text/xml": "xml",
+    "image/jpg": "jpg",
     "image/jpeg": "jpeg",
     "image/png": "png",
     "image/gif": "gif",
@@ -80,6 +82,7 @@ function downloadBaseImg(base, name) {
         navigator.msSaveBlob(blob, fname);
     }
     else {
+        var btnDownload = document.createElement("a");            // 创建一个a节点插入的document
         btnDownload.download = fname;
         btnDownload.href = URL.createObjectURL(blob);
         btnDownload.click();
@@ -119,7 +122,7 @@ function getData(base64) {
  * @param {number} sliceSize
  */
 function b64toBlob(b64Data, contentType, sliceSize) {
-    contentType = contentType || '';
+    contentType = contentType || "";
     sliceSize = sliceSize || 512;
 
     var byteCharacters = atob(b64Data);
@@ -133,6 +136,7 @@ function b64toBlob(b64Data, contentType, sliceSize) {
             byteNumbers[i] = slice.charCodeAt(i);
         }
 
+        // eslint-disable-next-line no-undef
         var byteArray = new Uint8Array(byteNumbers);
 
         byteArrays.push(byteArray);
@@ -141,3 +145,16 @@ function b64toBlob(b64Data, contentType, sliceSize) {
     var blob = new Blob(byteArrays, { type: contentType });
     return blob;
 }
+
+function save(url,bool,name) {
+    if(bool) {
+        downloadBaseImg(url, name);
+    } else {
+        oDownLoad(url);
+    }
+}
+
+module.exports = {
+    save: save,
+    getBrowser: getBrowser
+};
