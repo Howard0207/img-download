@@ -1,5 +1,5 @@
 {
-  "name": "imgload",
+  "name": "compatible-imgload",
   "version": "1.0.0",
   "description": "a module helps to download img in the web front end",
   "main": "index.js",
