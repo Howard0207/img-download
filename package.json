@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/Howard0207/img-download/issues"
   },
-  "homepage": "https://github.com/Howard0207/img-download#readme"
+  "homepage": "https://github.com/Howard0207/img-download#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.3"
+  }
 }
