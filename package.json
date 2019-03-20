@@ -1,0 +1,22 @@
+{
+  "name": "img-download",
+  "version": "1.0.0",
+  "description": "a module helps to download img in the front web page",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Howard0207/img-download.git"
+  },
+  "keywords": [
+    "imageDownload"
+  ],
+  "author": "GH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Howard0207/img-download/issues"
+  },
+  "homepage": "https://github.com/Howard0207/img-download#readme"
+}
